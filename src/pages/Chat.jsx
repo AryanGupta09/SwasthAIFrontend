@@ -8,6 +8,7 @@ const Chat = () => {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [loadingHistory, setLoadingHistory] = useState(true);
   const chatEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -17,6 +18,49 @@ const Chat = () => {
   useEffect(() => {
     scrollToBottom();
   }, [chat]);
+
+  // Load chat history on mount
+  useEffect(() => {
+    loadChatHistory();
+  }, []);
+
+  const loadChatHistory = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await API.get("/chat/history", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      if (res.data.success && res.data.chats) {
+        const formattedChats = res.data.chats.map(c => ({
+          role: c.role === "user" ? "user" : "ai",
+          text: c.message
+        }));
+        setChat(formattedChats);
+      }
+    } catch (err) {
+      console.error("Failed to load chat history:", err);
+    } finally {
+      setLoadingHistory(false);
+    }
+  };
+
+  const clearHistory = async () => {
+    if (!window.confirm("Are you sure you want to clear all chat history?")) {
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem("token");
+      await API.delete("/chat/clear", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setChat([]);
+    } catch (err) {
+      console.error("Failed to clear chat history:", err);
+      alert("Failed to clear chat history");
+    }
+  };
 
   const sendMessage = async () => {
     if (!message.trim()) return;
@@ -84,9 +128,16 @@ const Chat = () => {
           <h1 className="chat-logo" onClick={() => navigate("/dashboard")}>
             💪 SwasthAI
           </h1>
-          <button className="chat-back-btn" onClick={() => navigate("/dashboard")}>
-            ← Back to Dashboard
-          </button>
+          <div className="chat-header-actions">
+            {chat.length > 0 && (
+              <button className="chat-clear-btn" onClick={clearHistory}>
+                🗑️ Clear History
+              </button>
+            )}
+            <button className="chat-back-btn" onClick={() => navigate("/dashboard")}>
+              ← Back to Dashboard
+            </button>
+          </div>
         </div>
       </header>
 
@@ -102,7 +153,12 @@ const Chat = () => {
         <div className="chat-wrapper">
           {/* Chat Messages */}
           <div className="chat-messages">
-            {chat.length === 0 && (
+            {loadingHistory ? (
+              <div className="chat-loading">
+                <div className="spinner"></div>
+                <p>Loading chat history...</p>
+              </div>
+            ) : chat.length === 0 ? (
               <div className="chat-welcome">
                 <div className="chat-welcome-icon">🤖</div>
                 <h3 className="chat-welcome-title">Welcome to SwasthAI Coach!</h3>
@@ -130,7 +186,7 @@ const Chat = () => {
                   </div>
                 </div>
               </div>
-            )}
+            ) : null}
             
             {chat.map((c, i) => (
               <div

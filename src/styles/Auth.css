@@ -426,3 +426,13 @@
     transform: translateY(-10px);
   }
 }
+
+/* Loading Note */
+.auth-loading-note {
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  margin-top: 10px;
+  font-style: italic;
+  animation: fadeIn 0.5s ease;
+}

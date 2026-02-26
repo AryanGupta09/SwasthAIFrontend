@@ -238,6 +238,12 @@ const Register = () => {
                   <span>Create Account</span>
                 )}
               </button>
+
+              {loading && (
+                <p className="auth-loading-note">
+                  ⏳ First request may take 30-60 seconds as server wakes up
+                </p>
+              )}
             </form>
 
             <div className="auth-divider">

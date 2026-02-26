@@ -148,12 +148,18 @@ const Login = () => {
                 {loading ? (
                   <>
                     <span className="spinner"></span>
-                    <span>Logging in...</span>
+                    <span>Connecting to server...</span>
                   </>
                 ) : (
                   <span>Login</span>
                 )}
               </button>
+
+              {loading && (
+                <p className="auth-loading-note">
+                  ⏳ First login may take 30-60 seconds as server wakes up
+                </p>
+              )}
             </form>
 
             <div className="auth-divider">

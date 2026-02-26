@@ -40,7 +40,7 @@ const Login = () => {
       navigate("/dashboard");
 
     } catch (err) {
-      console.log(err.response?.data);
+      console.error("Login error:", err);
       setError(err.response?.data?.message || "Login failed. Please check your credentials.");
     } finally {
       setLoading(false);
@@ -148,18 +148,12 @@ const Login = () => {
                 {loading ? (
                   <>
                     <span className="spinner"></span>
-                    <span>Connecting to server...</span>
+                    <span>Logging in...</span>
                   </>
                 ) : (
                   <span>Login</span>
                 )}
               </button>
-
-              {loading && (
-                <p className="auth-loading-note">
-                  ⏳ First login may take 30-60 seconds as server wakes up
-                </p>
-              )}
             </form>
 
             <div className="auth-divider">

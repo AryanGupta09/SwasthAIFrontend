@@ -129,7 +129,7 @@ const Diet = () => {
       setDiet(res.data.meals);
 
     } catch (err) {
-      console.log(err.response?.data);
+      console.error("Diet generation error:", err);
       setError(err.response?.data?.message || "Diet generation failed. Please try again.");
     } finally {
       setLoading(false);

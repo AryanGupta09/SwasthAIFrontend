@@ -92,8 +92,6 @@ const Profile = () => {
         diseases: formData.diseases.split(",").map(d => d.trim()).filter(d => d)
       };
 
-      console.log("Sending update data:", updateData); // Debug log
-
       const res = await API.put("/user/profile", updateData, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -127,10 +125,6 @@ const Profile = () => {
       setTimeout(() => setSuccess(""), 3000);
     } catch (err) {
       console.error("Profile update error:", err);
-      console.error("Error response:", err.response);
-      console.error("Error response data:", err.response?.data);
-      console.error("Error response status:", err.response?.status);
-      console.error("Error message:", err.message);
       
       const errorMessage = err.response?.data?.error || 
                           err.response?.data?.message || 

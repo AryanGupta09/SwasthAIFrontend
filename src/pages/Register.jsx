@@ -78,7 +78,7 @@ const Register = () => {
       navigate("/dashboard");
 
     } catch (err) {
-      console.log(err.response?.data);
+      console.error("Registration error:", err);
       setError(err.response?.data?.message || "Registration failed. Please try again.");
     } finally {
       setLoading(false);
@@ -238,12 +238,6 @@ const Register = () => {
                   <span>Create Account</span>
                 )}
               </button>
-
-              {loading && (
-                <p className="auth-loading-note">
-                  ⏳ First request may take 30-60 seconds as server wakes up
-                </p>
-              )}
             </form>
 
             <div className="auth-divider">

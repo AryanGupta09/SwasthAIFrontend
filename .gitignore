@@ -12,12 +12,7 @@ dist
 dist-ssr
 *.local
 
-# Environment variables — DO NOT commit
-.env
-.env.local
-.env.*.local
-
-# Editor
+# Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea

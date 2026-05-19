@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../services/api";
 import "../styles/MealSwap.css";
-import ThemeToggle from "../components/ThemeToggle";
 
 const MealSwap = () => {
   const navigate = useNavigate();
@@ -97,7 +96,7 @@ const MealSwap = () => {
 
     } catch (err) {
       console.error(err);
-      setError(err.response?.data?.message || err.response?.data?.detail || "Failed to adjust meals");
+      setError(err.response?.data?.message || "Failed to adjust meals");
     } finally {
       setLoading(false);
     }
@@ -114,7 +113,6 @@ const MealSwap = () => {
           <button className="meal-swap-back-btn" onClick={() => navigate("/dashboard")}>
             ← Back to Dashboard
           </button>
-          <ThemeToggle />
         </div>
       </header>
 

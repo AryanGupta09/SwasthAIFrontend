@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../services/api";
 import "../styles/Diet.css";
-import ThemeToggle from "../components/ThemeToggle";
 
 const Diet = () => {
   const navigate = useNavigate();
@@ -118,12 +117,7 @@ const Diet = () => {
         {
           bmi: parseFloat(form.bmi),
           foodPreference: form.foodPreference,
-          diseases: form.diseases,
-          weight: parseFloat(form.weight),
-          height: parseFloat(form.height),
-          age: parseInt(form.age),
-          gender: form.gender,
-          activityLevel: form.activityLevel
+          diseases: form.diseases
         },
         {
           headers: {
@@ -136,7 +130,7 @@ const Diet = () => {
 
     } catch (err) {
       console.error("Diet generation error:", err);
-      setError(err.response?.data?.message || err.response?.data?.detail || "Diet generation failed. Please try again.");
+      setError(err.response?.data?.message || "Diet generation failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -162,7 +156,6 @@ const Diet = () => {
           <button className="diet-back-btn" onClick={() => navigate("/dashboard")}>
             ← Back to Dashboard
           </button>
-          <ThemeToggle />
         </div>
       </header>
 

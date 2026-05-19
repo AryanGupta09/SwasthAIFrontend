@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../services/api";
 import "../styles/Profile.css";
-import ThemeToggle from "../components/ThemeToggle";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -129,7 +128,6 @@ const Profile = () => {
       
       const errorMessage = err.response?.data?.error || 
                           err.response?.data?.message || 
-                          err.response?.data?.detail ||
                           err.message || 
                           "Failed to update profile";
       
@@ -179,7 +177,6 @@ const Profile = () => {
           <button className="profile-back-btn" onClick={() => navigate("/dashboard")}>
             ← Back to Dashboard
           </button>
-          <ThemeToggle />
         </div>
       </header>
 

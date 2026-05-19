@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Dashboard.css";
-import ThemeToggle from "../components/ThemeToggle";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -32,28 +31,21 @@ const Dashboard = () => {
       title: "Diet Plan",
       description: "Get personalized AI-powered meal plans based on your BMI and health goals",
       path: "/diet",
-      color: "#10b981"
-    },
-    {
-      icon: "🏋️",
-      title: "Workout Tracker",
-      description: "Log workouts, track weekly progress, and get AI-powered 7-day fitness plans",
-      path: "/workout",
-      color: "#f59e0b"
+      color: "#4caf50"
     },
     {
       icon: "🔄",
       title: "Meal Swap",
       description: "Had something unhealthy? Get adjusted meal recommendations for the rest of your day",
       path: "/meal-swap",
-      color: "#0d9488"
+      color: "#ff9800"
     },
     {
       icon: "💬",
       title: "AI Coach",
       description: "Chat with your personal fitness assistant anytime, anywhere",
       path: "/chat",
-      color: "#6366f1"
+      color: "#2196f3"
     }
   ];
 
@@ -76,7 +68,6 @@ const Dashboard = () => {
             <button className="dashboard-logout-btn" onClick={logout}>
               <span>🚪</span> Logout
             </button>
-            <ThemeToggle />
           </div>
         </div>
       </header>
@@ -141,7 +132,6 @@ const Dashboard = () => {
             <h5 className="dashboard-footer-heading">Quick Links</h5>
             <ul className="dashboard-footer-links">
               <li onClick={() => navigate("/diet")}>Diet Plan</li>
-              <li onClick={() => navigate("/workout")}>Workout Tracker</li>
               <li onClick={() => navigate("/meal-swap")}>Meal Swap</li>
               <li onClick={() => navigate("/chat")}>AI Coach</li>
               <li onClick={() => navigate("/profile")}>My Profile</li>

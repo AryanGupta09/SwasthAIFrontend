@@ -1,8 +1,10 @@
 import axios from "axios";
 
-// Production backend URL
+// Development me localhost, production me Render URL
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+
 const API = axios.create({
-  baseURL: "https://swasthaibackend.onrender.com/api"
+  baseURL: BASE_URL
 });
 
 export default API;

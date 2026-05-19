@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../services/api";
 import "../styles/Auth.css";
+import ThemeToggle from "../components/ThemeToggle";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ const Login = () => {
 
     } catch (err) {
       console.error("Login error:", err);
-      setError(err.response?.data?.message || "Login failed. Please check your credentials.");
+      setError(err.response?.data?.message || err.response?.data?.detail || "Login failed. Please check your credentials.");
     } finally {
       setLoading(false);
     }
@@ -49,6 +50,7 @@ const Login = () => {
 
   return (
     <div className="auth-page">
+      <ThemeToggle floating />
       <div className="auth-container">
         {/* Left Side - Branding */}
         <div className="auth-left">

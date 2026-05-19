@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../services/api";
 import "../styles/Auth.css";
+import ThemeToggle from "../components/ThemeToggle";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -79,7 +80,7 @@ const Register = () => {
 
     } catch (err) {
       console.error("Registration error:", err);
-      setError(err.response?.data?.message || "Registration failed. Please try again.");
+      setError(err.response?.data?.message || err.response?.data?.detail || "Registration failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -87,6 +88,7 @@ const Register = () => {
 
   return (
     <div className="auth-page">
+      <ThemeToggle floating />
       <div className="auth-container">
         {/* Left Side - Branding */}
         <div className="auth-left">
